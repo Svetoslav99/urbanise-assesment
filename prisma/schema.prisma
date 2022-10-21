@@ -1,0 +1,59 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Manager {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName    String
+  lastName     String
+  managedSince DateTime
+
+  @@unique([firstName, lastName, managedSince])
+}
+
+model Region {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+}
+
+model Unit {
+  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
+  lotAlpha           Int
+  floor              Int
+  type               String
+
+  @@unique([lotAlpha, floor, type])
+}
+
+model DetailedProperty {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  plan              Int @unique
+  units             String[]
+  city              String
+  regionId          String
+  managerId         String
+  previousManagerId String
+  managementCompany String
+  planRegistered    DateTime
+  address           String
+  account           String
+  abn               String
+}
+
+model ViewProperty {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  plan         Int @unique
+  unitCount    Int
+  city         String
+  region       String
+  manager      String
+  managedSince String
+  detailedPropertyId String
+}

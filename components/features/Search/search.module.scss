@@ -1,0 +1,16 @@
+.container {
+    display  : flex;
+    flex-flow: column;
+}
+
+.label {
+    padding-bottom: 8px;
+}
+
+.input {
+    height       : 32px;
+    min-width    : 240px;
+    width        : 50vw;
+    border-radius: 8px;
+    border-color : #bfbfbf;
+}

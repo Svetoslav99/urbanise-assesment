@@ -1,0 +1,41 @@
+@import './colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Nunito+Sans&display=swap');
+
+body {
+  background-color: $gray-100;
+}
+
+* {
+  padding   : 0;
+  margin    : 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+
+}
+
+a {
+  color          : inherit;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width : 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $gray-100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background   : $primary-500;
+  border-radius: 16px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-700
+}

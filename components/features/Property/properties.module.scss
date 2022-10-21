@@ -1,0 +1,22 @@
+.filter-container {
+    display        : flex;
+    flex-flow      : column;
+    justify-content: center;
+    align-items    : center;
+    row-gap        : 16px;
+    width          : 100%;
+    min-width      : 250px;
+    height         : 30vh;
+}
+
+.list-items-container {
+    display        : flex;
+    flex-direction : column;
+    justify-content: flex-start;
+    align-items    : center;
+    row-gap        : 48px;
+    padding-top    : 5vh;
+    width          : 50vw;
+    min-width      : 250px;
+    height         : 100%;
+}

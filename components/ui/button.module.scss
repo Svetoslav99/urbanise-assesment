@@ -1,0 +1,31 @@
+@use '../../styles/colors.scss'as c;
+
+.button {
+    cursor          : pointer;
+    height          : 3.5rem;
+    border          : 1px solid c.$black-100;
+    border-radius   : 1rem;
+    font-weight     : 600;
+    background-color: c.$primary-500;
+    color           : c.$gray-100;
+    padding         : 0 0.5rem;
+
+    &__primary {
+        font-size: 1.5rem;
+    }
+
+    &__secondary {
+        height   : 2.5rem;
+        margin   : 0.5rem 0;
+        font-size: 1rem;
+    }
+
+    &:hover {
+        background-color: c.$primary-700;
+    }
+}
+
+.data_container {
+    width     : 10%;
+    text-align: center;
+}
