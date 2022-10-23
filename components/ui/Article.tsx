@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ViewProperty } from '../../types/property';
 import { Button } from '../';
@@ -12,20 +12,21 @@ type Response = {
 type Props = {
     property: ViewProperty;
     setProperties: React.Dispatch<React.SetStateAction<ViewProperty[]>>;
+    setOnDeleteError: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Article: React.FC<Props> = ({ property, setProperties }) => {
-    const propertyDeleteHandler = async () => {
-        // post request with the property id ( from there we can delete the detailedProperty also, since we have its id)
-        console.log('property.id: ', property.id);
-        console.log('property.detailedPropertyId: ', property.detailedPropertyId);
+const Article: React.FC<Props> = ({ property, setProperties, setOnDeleteError }) => {
+    const [isDeleting, setIsDeleting] = useState(false);
 
+    const propertyDeleteHandler = async () => {
         try {
-            const res = await fetch('/api/properties/id', {
+            setIsDeleting(true);
+            const res = await fetch('/api/properties/delete', {
                 method: 'POST',
                 body: JSON.stringify({
-                    ViewPropertyId: property.id,
-                    DetailedPropertyId: property.detailedPropertyId,
+                    viewPropertyId: property.id,
+                    detailedPropertyId: property.detailedPropertyId,
+                    plan: property.plan,
                     deleting: true
                 }),
                 headers: { 'Content-Type': 'application/json' }
@@ -41,7 +42,12 @@ const Article: React.FC<Props> = ({ property, setProperties }) => {
                     return newState;
                 });
             }
-        } catch (error) {}
+            setIsDeleting(false);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            setOnDeleteError(message);
+            setIsDeleting(false);
+        }
     };
 
     return (
@@ -54,7 +60,12 @@ const Article: React.FC<Props> = ({ property, setProperties }) => {
             <p className={classes.data_container}>{property.manager}</p>
             <p className={classes.data_container}>{property.managedSince}</p>
 
-            <Button type='button' classType='tertiary' value='Delete' onClick={propertyDeleteHandler} />
+            <Button
+                type='button'
+                classType='tertiary'
+                value={isDeleting ? 'Deleting ...' : 'Delete'}
+                onClick={propertyDeleteHandler}
+            />
         </article>
     );
 };
