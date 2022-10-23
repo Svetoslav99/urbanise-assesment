@@ -11,24 +11,11 @@ type Response = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
-    /**
-     * GET /api/regions returns:
-        [{
-            id: 0,
-            name: “Queensland”,
-        },{
-            id: 1,
-            name: “Sofia”,
-        } 
-    ]
-    
-     * 
-    */
     if (req.method === 'GET') {
         try {
             await prisma.$connect();
 
-            const regions: Region[] | undefined = await prisma.region.findMany();
+            const regions = await prisma.region.findMany();
 
             await prisma.$disconnect();
 
