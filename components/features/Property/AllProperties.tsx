@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ViewProperty } from '../../../types/property';
 import Article from '../../ui/Article';
@@ -12,6 +12,8 @@ type Props = {
 };
 
 const AllProperties: React.FC<Props> = ({ properties, setProperties, error, isLoading }) => {
+    const [onDeleteError, setOnDeleteError] = useState('');
+
     if (error) {
         return <h3 className={classes.error}>{error}</h3>;
     }
@@ -26,6 +28,9 @@ const AllProperties: React.FC<Props> = ({ properties, setProperties, error, isLo
 
     return (
         <section className={classes.container}>
+
+            {onDeleteError && <p>{onDeleteError}</p>}
+
             <h2 className={classes.title}>Properties</h2>
 
             <div className={classes.headers}>
@@ -41,7 +46,7 @@ const AllProperties: React.FC<Props> = ({ properties, setProperties, error, isLo
             <hr className={classes.hr} />
 
             {properties.map((property: ViewProperty) => (
-                <Article key={+property.id} property={property} />
+                <Article key={+property.id} property={property} setProperties={setProperties} setOnDeleteError={setOnDeleteError} />
             ))}
         </section>
     );
