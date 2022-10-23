@@ -1,4 +1,5 @@
-import Manager from '../../../types/manager';
+import { Manager } from '@prisma/client';
+
 import classes from './showManager.module.scss';
 
 type Props = {
@@ -11,11 +12,17 @@ const ShowManager: React.FC<Props> = ({ managerData }) => {
     }
 
     return (
-        <section>
-            <title>Manager information</title>
+        <section className={classes.container}>
+            <h2 className={classes.title}>Manager information for id {managerData.id}</h2>
+
+            <hr className={classes.hr} />
+
+            <h3>First Name</h3>
             <p>{managerData.firstName}</p>
+            <h3>Last Name</h3>
             <p>{managerData.lastName}</p>
-            <p>{managerData.managedSince}</p>
+            <h3>Managed Since</h3>
+            <p>{managerData.managedSince.toLocaleString()}</p>
         </section>
     );
 };
