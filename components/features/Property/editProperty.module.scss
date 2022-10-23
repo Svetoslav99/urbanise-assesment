@@ -1,0 +1,66 @@
+@use '../../../styles/colors.scss'as c;
+
+.container {
+    display        : flex;
+    flex-flow      : column;
+    justify-content: center;
+    align-items    : center;
+
+    &--property {
+        width         : 35vw;
+        row-gap       : 0.5rem;
+        min-width     : 320px;
+        max-width     : 380px;
+        height        : fit-content;
+        border        : 4px solid c.$primary-500;
+        box-shadow    : c.$box-shadow-form;
+        border-radius : 1.5rem;
+        padding-bottom: 1rem;
+    }
+}
+
+.label,
+.header {
+    padding-bottom: 8px;
+    font-size     : 1rem;
+    font-weight   : 600;
+}
+
+.input {
+    outline     : 0;
+    border-width: 0 0 1px;
+    border-color: c.$gray-300;
+    width       : 50vw;
+    height      : 32px;
+    font-size   : 1.5rem;
+
+    &::placeholder {
+        color      : c.$gray-300;
+        font-size  : 24px;
+        line-height: 30px;
+    }
+
+    &--small {
+        max-width: 60%;
+        height   : 32px;
+        font-size: 1.5rem;
+    }
+
+    &--textarea {
+        height: 80px;
+    }
+}
+
+.response {
+    padding-bottom: 1rem;
+    width         : 100%;
+    text-align    : center;
+
+    &--error {
+        color: c.$red-500;
+    }
+
+    &--success {
+        color: c.$primary-500;
+    }
+}
