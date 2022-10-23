@@ -5,7 +5,6 @@
     flex-flow      : column;
     justify-content: center;
     align-items    : center;
-    height         : 40vh;
     width          : 35vw;
     row-gap        : 0.5rem;
     min-width      : 320px;
@@ -14,7 +13,7 @@
     border         : 4px solid c.$primary-500;
     box-shadow     : c.$box-shadow-form;
     border-radius  : 1.5rem;
-    padding-bottom: 1rem;
+    padding-bottom : 1rem;
 }
 
 .input {
@@ -34,5 +33,18 @@
 
     &--textarea {
         height: 80px;
+    }
+}
+
+.response {
+    padding-bottom: 1rem;
+    width         : 60%;
+
+    &--error {
+        color: c.$red-500;
+    }
+
+    &--success {
+        color: c.$primary-500;
     }
 }
