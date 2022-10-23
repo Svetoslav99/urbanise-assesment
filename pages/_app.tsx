@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 import { Layout } from '../components';
 import '../styles/globals.scss';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -33,6 +33,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
         </Layout>
     );
-}
+};
 
-export default MyApp;
+export default App;
