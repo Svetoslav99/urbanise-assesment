@@ -16,7 +16,7 @@ const Properties: React.FC = () => {
                 <Search setProperties={setProperties} setError={setError} setIsLoading={setIsLoading} />
             </section>
             <section className={classes['list-items-container']}>
-                <AllProperties properties={properties} error={error} isLoading={isLoading} />
+                <AllProperties properties={properties} setProperties={setProperties} error={error} isLoading={isLoading}  />
             </section>
         </>
     );
