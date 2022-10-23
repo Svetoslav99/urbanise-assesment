@@ -11,8 +11,7 @@ const Navbar: React.FC = () => {
                     <Link href='/property-details'>Property details</Link>
                 </li>
                 <li className={classes.item}>
-                    <Link href='/create-property'>Create Property</Link>{' '}
-                    {/** + options for creating and deleting a manager */}
+                    <Link href='/create-property'>Create Property</Link>
                 </li>
                 <li className={classes.item}>
                     <Link href='/properties'>All Properties</Link>
