@@ -55,5 +55,5 @@ model ViewProperty {
   region       String
   manager      String
   managedSince String
-  detailedPropertyId String
+  detailedPropertyId String @unique
 }
