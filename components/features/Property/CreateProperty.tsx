@@ -40,93 +40,134 @@ const CreateProperty: React.FC = () => {
                     abn: ''
                 }}
                 onSubmit={async (values, actions) => {
-                    if (!values.name) setError(prevState => prevState + ' Name field is required!');
+                    if (!values.name) {
+                        setError('Name field is required!');
+                        return;
+                    }
 
-                    if (!values.plan) setError(prevState => prevState + ' Plan field is required!');
+                    if (!values.plan) {
+                        setError('Plan field is required!');
+                        return;
+                    }
 
-                    if (!values.units || values.units.length === 0)
-                        setError(prevState => prevState + ' Atleast one unit field is required!');
+                    if (!values.units || values.units.length === 0) {
+                        setError('Atleast one unit field is required!');
+                        return;
+                    }
 
                     units.forEach((unit: Unit) => {
-                        if (!unit.floor || unit.floor < -1)
-                            setError(prevState => prevState + ' Unit floor is required and should be greater than -1!');
+                        if (!unit.floor || unit.floor < -1) {
+                            setError('Unit floor is required and should be greater than -1!');
+                            return;
+                        }
 
-                        if (!unit.lotAlpha) setError(prevState => prevState + 'Unit lot Alpha is required!');
+                        if (!unit.lotAlpha) {
+                            setError('Unit lot Alpha is required!');
+                            return;
+                        }
 
-                        if (!unit.type) setError(prevState => prevState + ' Unit Type is required!');
+                        if (!unit.type) {
+                            setError('Unit Type is required!');
+                            return;
+                        }
                     });
 
-                    if (!values.city) setError(prevState => prevState + ' City field is required!');
+                    if (!values.city) {
+                        setError('City field is required!');
+                        return;
+                    }
 
-                    if (!values.region) setError(prevState => prevState + ' Region field is required!');
+                    if (!values.region) {
+                        setError('Region field is required!');
+                        return;
+                    }
 
-                    if (!values.manager.firstName)
-                        setError(prevState => prevState + ' Current Manager first name field is required!');
-                    if (!values.manager.lastName)
-                        setError(prevState => prevState + ' Current Manager last name field is required!');
-                    if (!values.manager.managedSince)
-                        setError(prevState => prevState + ' Current Manager managed since field is required!');
+                    if (!values.manager.firstName) {
+                        setError('Current Manager first name field is required!');
+                        return;
+                    }
 
-                    if (!values.previousManager.firstName)
-                        setError(prevState => prevState + ' Previous Manager first name field is required!');
-                    if (!values.previousManager.lastName)
-                        setError(prevState => prevState + ' Previous Manager last name field is required!');
-                    if (!values.previousManager.managedSince)
-                        setError(prevState => prevState + ' Previous Manager managed since field is required!');
+                    if (!values.manager.lastName) {
+                        setError('Current Manager last name field is required!');
+                        return;
+                    }
 
-                    if (!values.managementCompany)
-                        setError(prevState => prevState + ' Management Company field is required!');
+                    if (!values.manager.managedSince) {
+                        setError('Current Manager managed since field is required!');
+                        return;
+                    }
 
-                    if (!values.planRegistered)
-                        setError(prevState => prevState + ' Plan Registered field is required!');
+                    if (!values.previousManager.firstName) {
+                        setError('Previous Manager first name field is required!');
+                        return;
+                    }
+                    if (!values.previousManager.lastName) {
+                        setError('Previous Manager last name field is required!');
+                        return;
+                    }
+                    if (!values.previousManager.managedSince) {
+                        setError('Previous Manager managed since field is required!');
+                        return;
+                    }
+
+                    if (!values.managementCompany) {
+                        setError('Management Company field is required!');
+                        return;
+                    }
+
+                    if (!values.planRegistered) {
+                        setError('Plan Registered field is required!');
+                        return;
+                    }
 
                     const isValidDate = values.planRegistered.match(/^\d{4}-\d{2}-\d{2}$/);
-                    if (!isValidDate)
-                        setError(
-                            prevState =>
-                                prevState + ' Plan Registered field is invalid! The format should be "YYYY-MM-DD"!'
-                        );
-
-                    if (!values.address) setError(prevState => prevState + ' Address field is required!');
-
-                    if (!values.account) setError(prevState => prevState + ' Account field is required!');
-
-                    if (!values.abn) setError(prevState => prevState + ' Abn field is required!');
-
-                    if (error) {
-                        setError('');
+                    if (!isValidDate) {
+                        setError('Plan Registered field is invalid! The format should be "YYYY-MM-DD"!');
                         return;
+                    }
+
+                    if (!values.address) {
+                        setError('Address field is required!');
+                        return;
+                    }
+
+                    if (!values.account) {
+                        setError('Account field is required!');
+                        return;
+                    }
+
+                    if (!values.abn) {
+                        setError('Abn field is required!');
+                        return;
+                    }
+
+                    const res = await fetch('/api/properties', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            name: values.name,
+                            plan: values.plan,
+                            units: values.units,
+                            city: values.city,
+                            region: values.region,
+                            manager: values.manager,
+                            previousManager: values.previousManager,
+                            managementCompany: values.managementCompany,
+                            planRegistered: values.planRegistered,
+                            address: values.address,
+                            account: values.account,
+                            abn: values.abn
+                        }),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    const data: ResponseData = await res.json();
+
+                    if (data.error) {
+                        successMessage && setSuccessMessage('');
+                        setError(data.message);
                     } else {
-                        console.log('error: ', error);
-
-                        const res = await fetch('/api/properties', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                name: values.name,
-                                plan: values.plan,
-                                units: values.units,
-                                city: values.city,
-                                region: values.region,
-                                manager: values.manager,
-                                previousManager: values.previousManager,
-                                managementCompany: values.managementCompany,
-                                planRegistered: values.planRegistered,
-                                address: values.address,
-                                account: values.account,
-                                abn: values.abn
-                            }),
-                            headers: { 'Content-Type': 'application/json' }
-                        });
-
-                        const data: ResponseData = await res.json();
-
-                        if (data.error) {
-                            successMessage && setSuccessMessage('');
-                            setError(data.message);
-                        } else {
-                            error && setError('');
-                            setSuccessMessage(data.message);
-                        }
+                        error && setError('');
+                        setSuccessMessage(data.message);
                     }
 
                     actions.setSubmitting(false);
@@ -149,22 +190,33 @@ const CreateProperty: React.FC = () => {
                         <FieldArray
                             name='units'
                             render={arrayHelpers => (
-                                <div>
+                                <div style={{ width: '30vw', textAlign: 'center' }}>
                                     {values.units.map((unit, index) => (
                                         <div className='row' key={index}>
                                             <div className='col'>
                                                 <label htmlFor={`units.${index}.lotAlpha`}>Unit lotAlpha</label>
-                                                <Field name={`units.${index}.lotAlpha`} placeholder='1' type='number' />
+                                                <Field
+                                                    className={classes.input}
+                                                    name={`units.${index}.lotAlpha`}
+                                                    placeholder='1'
+                                                    type='number'
+                                                />
                                             </div>
 
                                             <div className='col'>
                                                 <label htmlFor={`units.${index}.floor`}>Unit floor</label>
-                                                <Field name={`units.${index}.floor`} placeholder='3' type='number' />
+                                                <Field
+                                                    className={classes.input}
+                                                    name={`units.${index}.floor`}
+                                                    placeholder='3'
+                                                    type='number'
+                                                />
                                             </div>
 
                                             <div className='col'>
                                                 <label htmlFor={`units.${index}.type`}>Unit type</label>
                                                 <Field
+                                                    className={classes.input}
                                                     name={`units.${index}.type`}
                                                     placeholder='Residential'
                                                     type='string'
