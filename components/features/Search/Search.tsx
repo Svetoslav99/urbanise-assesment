@@ -16,18 +16,12 @@ type Response = {
 };
 
 const Search: React.FC<Props> = ({ setProperties, setError, setIsLoading }) => {
-    // Allow for searching by name and plan number and for filtering by region.
     const [nameInputValue, setNameInputValue] = useState('');
     const [planNumberInputValue, setPlanNumberInputValue] = useState<number>();
     const [regionInputValue, setRegionInputValue] = useState('');
 
     useEffect(() => {
         const timer = setTimeout(async () => {
-            // if (!nameInputValue && (planNumberInputValue === 0 || !planNumberInputValue) && !regionInputValue) {
-            //     setProperties([]);
-            //     return;
-            // }
-
             try {
                 setIsLoading(true);
 
@@ -42,8 +36,6 @@ const Search: React.FC<Props> = ({ setProperties, setError, setIsLoading }) => {
                 });
 
                 const data: Response = await res.json();
-
-                console.log('data in the FE: ', data);
 
                 if (data.error) {
                     throw new Error(data.message);
