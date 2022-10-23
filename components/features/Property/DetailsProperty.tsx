@@ -18,13 +18,13 @@ const DetailsProperty: React.FC = () => {
     const [detailedProperty, setDetailedPropery] = useState<DetailedProperty>();
     const planNumberRef = useRef<HTMLInputElement>(null);
 
-    const retrievePropertyDetailsHander = async (e: React.MouseEvent) => {
-        const planNumber = planNumberRef.current?.value;
+    const retrievePropertyDetailsHandler = async (e: React.MouseEvent) => {
+        const planNumber = planNumberRef.current!.value;
 
         try {
             setIsLoading(true);
 
-            const res = await fetch('/api/properties/plan-number', {
+            const res = await fetch('/api/properties/details', {
                 method: 'POST',
                 body: JSON.stringify({
                     planNumber: planNumber
@@ -61,7 +61,7 @@ const DetailsProperty: React.FC = () => {
                 type='button'
                 classType='secondary'
                 value={isLoading ? 'Searching ...' : 'Search'}
-                onClick={retrievePropertyDetailsHander}
+                onClick={retrievePropertyDetailsHandler}
             />
 
             {error && <p className={cn(classes.response, classes['response--error'])}>{error}</p>}
