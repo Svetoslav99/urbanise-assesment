@@ -3,6 +3,7 @@ export { default as Layout } from './layout/Layout';
 export { default as Properties } from './features/Property/Properties';
 export { default as AllProperties } from './features/Property/AllProperties';
 export { default as CreateProperty } from './features/Property/CreateProperty';
+export { default as EditProperty } from './features/Property/EditProperty';
 export { default as DetailsProperty } from './features/Property/DetailsProperty';
 export { default as Search } from './features/Search/Search';
 export { default as ShowManager } from './features/Manager/ShowManager';
