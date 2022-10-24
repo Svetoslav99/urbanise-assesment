@@ -46,18 +46,18 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 First, you shouldn’t spend more than 4-5 hours on this task. Not expecting anything fancy
 with CSS at all - just make sure there is some simple layout.
 
-Create a SPA with two pages:
-● list of properties
-● property details page
+* Create a SPA with two pages:
+    * list of properties
+    * property details page
 
-In the list, show the following fields:
-● property name
-● plan number
-● unit count
-● city
-● region
-● manager and
-● managed since
+* In the list, show the following fields:
+    * property name
+    * plan number
+    * unit count
+    * city
+    * region
+    * manager and
+    * managed since
 
 Allow for searching by name and plan number and for filtering by region.
 
@@ -69,6 +69,7 @@ You can either use a fake server/xhr library or simulate the BE responses in you
 layer.
 
 The API looks as follows:
+```
 GET /api/properties/ returns:
 [{
 id: 0,
@@ -115,3 +116,4 @@ address: “address”,
 account: “acc”,
 abn: “ABN”,
 }
+```
