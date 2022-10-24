@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Attached to this git repository you can find a demo.mkv file in which I am going through the main features.
 
 ## Getting Started
-First, after installing dependancies, run in the root project terminal 'prisma generate' to generate ORM models that prisma.schema file defines.
+First, after installing dependancies, run in the root project terminal `prisma generate` to generate ORM models that prisma.schema file defines.
 
 ### .env
 Create your own .env file based on the .example.env.
