@@ -8,7 +8,7 @@ First, after installing dependancies, run in the root project terminal 'prisma g
 
 ### .env
 Create your own .env file based on the .example.env.
-for the 'DATABASE_URL' you can use this value: 'mongodb+srv://urbanise:NeDlQ0OIUbSKNKtpE@urbanise.x8f8qco.mongodb.net/urbanise?retryWrites=true&w=majority'
+for the 'DATABASE_URL' you can use this value: 'mongodb+srv://Svetoslav:BZSWwfxW2vjMWP9GN7gcTeWqFLU53E@urbanise.x8f8qco.mongodb.net/urbanise?retryWrites=true&w=majority'
 
 After that, run the development server:
 
