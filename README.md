@@ -42,6 +42,21 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
     
 ```
 
+## Project endpoints
+
+```
+
+./pages/api/regions (http://localhost:3000/regions)                     - Method: GET, returns: all regions from the database | null, message:string, error:boolean.
+./pages/api/manager (http://localhost:3000/manager)                     - Method: GET, returns: all managers from the database | null, message:string, error:boolean.
+./pages/api/manager/[id] (http://localhost:3000/manager/[id])           - Method: GET, returns: manager from the database | null, message:string, error:boolean.
+./pages/api/properties (http://localhost:3000/properties && http://localhost:3000/create-property)  - Method: GET, returns: all properties from the database | null, message:string, error:boolean; Method: POST, req.body: property obj, returns: message:string, error:boolean.
+./pages/api/properties/filtered-properties                              - Method: POST, req.body: property name: string, plan number: number, region: string, returns: properties array | null, message: string, error:boolean.
+./pages/api/properties/edit (http://localhost:3000/edit-property)       - Method: POST, req.body: property obj, returns: message:string, error: boolean.
+./pages/api/properties/details (http://localhost:3000/property-details) - Method: POST, req.body: plan number: string, returns property obj, message:string, error:boolean.
+./pages/api/properties/delete                                           - Method: POST, req.body: viewPropertyId: string, detailedPropertyId: string, deleting: boolean, returns: message: string, error: boolean.
+
+```
+
 ## Urbanise assessment
 First, you shouldn’t spend more than 4-5 hours on this task. Not expecting anything fancy
 with CSS at all - just make sure there is some simple layout.
